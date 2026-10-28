@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahnoor MD - Official Dashboard</title>
+    <style>
+        body {
+            background-color: #090d16;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 40px;
+        }
+        .container {
+            max-width: 550px;
+            margin: 0 auto;
+            background: #111827;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid #1f2937;
+        }
+        h1 { color: #38bdf8; margin-bottom: 5px; font-size: 32px; }
+        .owner { color: #9ca3af; font-size: 14px; margin-bottom: 25px; }
+        .card {
+            background: #1f2937;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        .code-box {
+            font-size: 32px;
+            font-weight: bold;
+            color: #facc15;
+            letter-spacing: 4px;
+            margin-top: 10px;
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed #38bdf8;
+        }
+        #status {
+            font-weight: bold;
+            font-size: 18px;
+            color: #34d399;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mahnoor MD</h1>
+        <div class="owner">Powered by Mahnoor Mateen</div>
+        
+        <div class="card">
+            <p>Bot Status:</p>
+            <div id="status">Loading...</div>
+        </div>
+
+        <div class="card">
+            <p>Your WhatsApp Pairing Code:</p>
+            <div class="code-box" id="pairingCode">Loading...</div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        socket.on('update', (data) => {
+            document.getElementById('status').innerText = data.status;
+            document.getElementById('pairingCode').innerText = data.code;
+        });
+    </script>
+</body>
+</html>
